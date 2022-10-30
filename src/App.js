@@ -28,7 +28,15 @@ import './App.css';
 // },{
 //   name:'Vietnam',
 //   points:88,
-//   GD:20,
+//   GD:19,
+// },{
+//   name:'Anh',
+//   points:88,
+//   GD:40,
+// },{
+//   name:'Manchester City',
+//   points:88,
+//   GD:10,
 // },
 
 // ]
