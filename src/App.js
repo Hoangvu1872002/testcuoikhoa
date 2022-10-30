@@ -77,95 +77,96 @@ import './App.css';
 
 //bai3
 function App() {
- 
-  useEffect(()=>{
+
+  useEffect(() => {
 
     setIsLoading(false)
 
-    fetch('https://opentdb.com/api.php?amount=5&category=21&difficulty=easy&type=multiple').then((res)=>{  
-    return (res.json())}).then((data)=>{
-           setNewData(data.results)
-           setIsLoading(true)
+    fetch('https://opentdb.com/api.php?amount=5&category=21&difficulty=easy&type=multiple').then((res) => {
+      return (res.json())
+    }).then((data) => {
+      setNewData(data.results)
+      setIsLoading(true)
     })
-  },[])
-  const [newData,setNewData]=useState([]);
+  }, [])
+  const [newData, setNewData] = useState([]);
 
-  const [isLoading,setIsLoading]=useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
-	const [showScore, setShowScore] = useState(false);
+  const [showScore, setShowScore] = useState(false);
 
-	const [score, setScore] = useState(0);
+  const [score, setScore] = useState(0);
 
-const [testA,setTestA]=useState([]);
+  const [testA, setTestA] = useState([]);
 
-const [testB,setTestB]=useState([]);
-useEffect(()=>{
+  const [testB, setTestB] = useState([]);
+  useEffect(() => {
 
-  if (isLoading){
+    if (isLoading) {
 
-    setTestA(newData[currentQuestion].incorrect_answers)
-    setTestB(newData[currentQuestion].correct_answer)
+      setTestA(newData[currentQuestion].incorrect_answers)
+      setTestB(newData[currentQuestion].correct_answer)
 
-  }
-},[newData[currentQuestion]])
-const listQuestion=testA.concat(testB)
+    }
+  }, [newData[currentQuestion]])
+  const listQuestion = testA.concat(testB)
 
-function shuffleArray(array) {
+  function shuffleArray(array) {
 
-  for (let i = array.length - 1; i > 0; i--) {
+    for (let i = array.length - 1; i > 0; i--) {
 
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
 
+    }
   }
-}
-shuffleArray(listQuestion)
+  shuffleArray(listQuestion)
 
-const resetAll=()=>{
-window.location.reload()
-}
+  const resetAll = () => {
+    window.location.reload()
+  }
   return (
     <div className="App">
       {isLoading ? <>
         {showScore ? (
           <div className="form-reset">
 
-				<div className='score-section'>
-					You scored {score} out of {newData.length}
-				</div>
-        <button onClick={resetAll} className='btn-reset'>New questions</button>
-        </div>
-			) : (
-				<>
-					<div className='question-section'>
-						<div className='question-count'>
-							<span>Question {currentQuestion + 1}</span>/{newData.length}
-						</div>
-						<div className='question-text'>{newData[currentQuestion].question}</div>
-					</div>
-					<div className='answer-section'>
-						{ 
-          
-            listQuestion.map((answerOption) => (
-							<button onClick={()=>{
-                  if(answerOption===newData[currentQuestion].correct_answer){
-                    setScore(score +1)
+            <div className='score-section'>
+              You scored {score} out of {newData.length}
+            </div>
+            <button onClick={resetAll} className='btn-reset'>New questions</button>
+          </div>
+        ) : (
+          <>
+            <div className='question-section'>
+              <div className='question-count'>
+                <span>Question {currentQuestion + 1}</span>/{newData.length}
+              </div>
+              <div className='question-text'>{newData[currentQuestion].question}</div>
+            </div>
+            <div className='answer-section'>
+              {
+
+                listQuestion.map((answerOption) => (
+                  <button onClick={() => {
+                    if (answerOption === newData[currentQuestion].correct_answer) {
+                      setScore(score + 1)
+                    }
+                    const nextQuestion = currentQuestion + 1;
+                    if (nextQuestion < newData.length) {
+                      setCurrentQuestion(nextQuestion)
+                    } else { setShowScore(true) }
                   }
-                  const nextQuestion = currentQuestion + 1;
-                  if (nextQuestion < newData.length) {
-                    setCurrentQuestion(nextQuestion)
-                  } else {setShowScore(true)}
-                }
-              }>{answerOption}</button>
-						))
-   
-            }
-					</div>
-				</>
-			)}
-      </>: ''}
+                  }>{answerOption}</button>
+                ))
+
+              }
+            </div>
+          </>
+        )}
+      </> : ''}
     </div>
   );
 }
