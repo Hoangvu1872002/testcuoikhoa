@@ -41,10 +41,10 @@ import './App.css';
 
 // ]
 
-// const mang=[...listData].sort((a,b)=>{
-//   if (a.points>b.points) 
+// const mang=[...listData].sort((a, b)=>{
+//   if (a.points > b.points) 
 //   return -1;
-//   if (a.points<b.points)
+//   if (a.points < b.points)
 //   return 1;
 //   if (a.GD  > b.GD) 
 //   return -1;
