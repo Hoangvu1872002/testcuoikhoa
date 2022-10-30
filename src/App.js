@@ -46,10 +46,11 @@ import './App.css';
 //   return -1;
 //   if (a.points<b.points)
 //   return 1;
-//   if (a.GD>b.GD) 
+//   if (a.GD  > b.GD) 
 //   return -1;
-//   if (a.GD<b.GD) 
+//   if (a.GD < b.GD) 
 //   return -1;
+
 //   return 0;
 // })
 // mang.forEach((item,i)=>{
@@ -59,7 +60,8 @@ import './App.css';
 // console.log(mang)
 
 //bai1
-// let A1 = [1, 2, "a",'c','d']; let A2 = [1, 3, "b",'d']
+// let A1 = [1, 2, "a",'c','d']; 
+// let A2 = [1, 3, "b",'d'];
 // const mangTong=A1.concat(A2);
 // const trung=[]
 // for (let i=0;i<A1.length;i++){
