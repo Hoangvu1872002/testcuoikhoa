@@ -77,31 +77,46 @@ import './App.css';
 function App() {
  
   useEffect(()=>{
+
     setIsLoading(false)
-    fetch('https://opentdb.com/api.php?amount=5&category=21&difficulty=easy&type=multiple').then((res)=>{return (res.json())}).then((data)=>{
-      setNewData(data.results)
-      setIsLoading(true)
+
+    fetch('https://opentdb.com/api.php?amount=5&category=21&difficulty=easy&type=multiple').then((res)=>{  
+    return (res.json())}).then((data)=>{
+           setNewData(data.results)
+           setIsLoading(true)
     })
   },[])
   const [newData,setNewData]=useState([]);
+
   const [isLoading,setIsLoading]=useState(false);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
+
 	const [showScore, setShowScore] = useState(false);
+
 	const [score, setScore] = useState(0);
 
-const [test1,setTest1]=useState([]);
-const [test2,setTest2]=useState([]);
+const [testA,setTestA]=useState([]);
+
+const [testB,setTestB]=useState([]);
 useEffect(()=>{
+
   if (isLoading){
-    setTest1(newData[currentQuestion].incorrect_answers)
-    setTest2(newData[currentQuestion].correct_answer)
+
+    setTestA(newData[currentQuestion].incorrect_answers)
+    setTestB(newData[currentQuestion].correct_answer)
+
   }
 },[newData[currentQuestion]])
-const listQuestion=test1.concat(test2)
+const listQuestion=testA.concat(testB)
+
 function shuffleArray(array) {
+
   for (let i = array.length - 1; i > 0; i--) {
+
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
+
   }
 }
 shuffleArray(listQuestion)
@@ -149,7 +164,6 @@ window.location.reload()
 				</>
 			)}
       </>: ''}
-
     </div>
   );
 }
